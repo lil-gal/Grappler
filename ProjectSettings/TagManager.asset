@@ -43,6 +43,14 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Arm
+    uniqueID: 2900995429
+    locked: 0
+  - name: Gun
+    uniqueID: 2432141673
+    locked: 0
   m_RenderingLayers:
   - Default
+  - Arm
+  - Gun
   m_MigratedRenderPipelines: []

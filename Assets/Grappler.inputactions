@@ -16,18 +16,18 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Fire",
+                    "name": "Jump",
                     "type": "Button",
-                    "id": "2bf44638-0514-4572-a9c1-f25bbd9cd8ec",
+                    "id": "a5ef6e19-9035-4ee0-ad67-21749edf46eb",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Jump",
+                    "name": "Fire",
                     "type": "Button",
-                    "id": "a5ef6e19-9035-4ee0-ad67-21749edf46eb",
+                    "id": "2bf44638-0514-4572-a9c1-f25bbd9cd8ec",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",

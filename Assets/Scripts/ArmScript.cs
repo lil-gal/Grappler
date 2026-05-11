@@ -19,6 +19,16 @@ public class ArmScript : MonoBehaviour
         Vector2 direction = mouseWorld - transform.position;
 
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        
+        Vector3 scale = transform.localScale;
+
+        if (angle > -90f && angle < 90f){
+            scale.y = 1;
+        }else{
+            scale.y = -1;
+        }
+
+        transform.localScale = scale;
 
         float parentAngle = transform.parent ? transform.parent.eulerAngles.z : 0f;
 

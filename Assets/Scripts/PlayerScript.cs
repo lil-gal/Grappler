@@ -9,8 +9,6 @@ public class PlayerScript : MonoBehaviour
     public float deceleration;
     public float jumpForce = 7.2f;
 
-    public float jumpRayDistance = .2f;
-
     public float jumpBufferTime = 0.15f;
     float jumpBufferCounter; 
     
@@ -19,6 +17,7 @@ public class PlayerScript : MonoBehaviour
 
     public LayerMask walkables;
     public GameObject groundCheck;
+    HookGunScript hookGunScript;
 
 
     private Vector2 moveInput;
@@ -26,12 +25,13 @@ public class PlayerScript : MonoBehaviour
 
     void Start(){
         rb = GetComponent<Rigidbody2D>();
+        hookGunScript = GetComponentInChildren<HookGunScript>();
     }
 
 
     bool canJump;
     void FixedUpdate() {
-        canJump = Physics2D.Raycast(groundCheck.transform.position, Vector2.down, jumpRayDistance, walkables);
+        canJump = Physics2D.Raycast(groundCheck.transform.position, Vector2.down, .2f, walkables);
     }
 
     // Update is called once per frame
@@ -90,8 +90,7 @@ public class PlayerScript : MonoBehaviour
     float jumpHoldTimer;
     bool jumpReleased;
     public void OnJump(InputAction.CallbackContext context) {
-        
-        
+
         if (context.performed){
             jumpBufferCounter = jumpBufferTime;
             wantToJump = true;
@@ -100,14 +99,11 @@ public class PlayerScript : MonoBehaviour
             wantToJump = false;
             jumpReleased = true;
         }
-
-
         
-        
-
     }
 
     public void OnFire(InputAction.CallbackContext context) {
-        
+        if(!context.started) { return; }
+        hookGunScript.Fire();
     }
 }

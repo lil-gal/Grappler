@@ -2,12 +2,16 @@ using UnityEngine;
 
 public class HookGunScript : MonoBehaviour
 {
-    bool canFire;
 
     public GameObject hookPrefab;
-    void Start()
-    {
-        Fire();
+    [HideInInspector] public HookScript hookInstance; 
+    SpriteRenderer ren;
+    public Sprite Loaded;
+    public Sprite Unloaded;
+
+    void Start() {
+        ren = GetComponent<SpriteRenderer>();
+        ren.sprite = Loaded;
     }
 
     // Update is called once per frame
@@ -17,6 +21,18 @@ public class HookGunScript : MonoBehaviour
     }
 
     public void Fire() {
-        Instantiate(hookPrefab);
+        if(hookInstance == null) { // didnt fire yet
+            GameObject hook = Instantiate(hookPrefab,transform.position, transform.rotation, transform);
+            hookInstance = hook.GetComponent<HookScript>();
+            ren.sprite = Unloaded;
+        }
+        else {                   // fired alr
+            hookInstance.Retract();
+        }
+    }
+
+    public void OnReturn() {
+        hookInstance = null;  // if null, can fire, else not
+        ren.sprite = Loaded;
     }
 }

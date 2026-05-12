@@ -5,11 +5,14 @@ public class HookScript : MonoBehaviour
 {
     public float speed = 10f;
     public float maxDistance;
-    public bool retract;
+    [HideInInspector] public bool retract;
     Rigidbody2D rb;
     Transform gun;
 
     GameObject player;
+    LineRenderer lineRenderer;
+    public float lineWidth;
+    public Color lineColor;
     
     public LayerMask LatchOnto;
     public LayerMask PassThrough;
@@ -25,11 +28,26 @@ public class HookScript : MonoBehaviour
 
         rb = GetComponent<Rigidbody2D>();
         
+        lineRenderer = GetComponent<LineRenderer>();
     }
 
     
     void Update()
     {
+        lineRenderer.startWidth = lineWidth;
+        lineRenderer.endWidth = lineWidth;
+
+        lineRenderer.startColor = lineColor;
+        lineRenderer.endColor = lineColor;
+
+        // Set the number of vertices
+        lineRenderer.positionCount = 2;
+
+        lineRenderer.SetPosition(0, gun.transform.position);
+        lineRenderer.SetPosition(1, transform.position);
+        
+        
+        
         if (latched) {
             //rb.linearVelocity = Vector2.zero;
             rb.bodyType = RigidbodyType2D.Static;
@@ -63,6 +81,7 @@ public class HookScript : MonoBehaviour
         rb.bodyType = RigidbodyType2D.Dynamic;
         DistanceJoint2D joint = player.GetComponent<DistanceJoint2D>();
         joint.enabled = false;
+        player.GetComponent<PlayerScript>().StopSwing();
     }
 
     
@@ -83,9 +102,12 @@ public class HookScript : MonoBehaviour
 
             DistanceJoint2D joint = player.GetComponent<DistanceJoint2D>();
 
+            player.GetComponent<PlayerScript>().StartSwing();
+
             joint.enabled = true;
-            joint.connectedBody = rb;
-            //joint.distance = Vector2.Distance(player.transform.position, transform.position);
+            joint.connectedAnchor = transform.position;
+
+            joint.distance = Vector2.Distance(player.transform.position, transform.position);
         }
 
 

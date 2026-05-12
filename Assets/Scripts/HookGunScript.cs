@@ -10,7 +10,7 @@ public class HookGunScript : MonoBehaviour
     public Sprite Unloaded;
 
     void Start() {
-        ren = GetComponent<SpriteRenderer>();
+        ren = transform.parent.GetComponent<SpriteRenderer>();
         ren.sprite = Loaded;
     }
 
@@ -29,6 +29,14 @@ public class HookGunScript : MonoBehaviour
         else {                   // fired alr
             hookInstance.Retract();
         }
+    }
+
+    public bool TryToGetOff() {
+        if(hookInstance != null) { // didnt fire yet
+            hookInstance.Retract();
+            return true;
+        }
+        return false;
     }
 
     public void OnReturn() {

@@ -28,6 +28,12 @@ public class LevelManagerScript : MonoBehaviour
 
     public void ResetLevel() {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        ClockManagerScript.Reset();
+    }
+
+    public static void Reset() {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        ClockManagerScript.Reset();
     }
 
 
@@ -54,12 +60,16 @@ public class LevelManagerScript : MonoBehaviour
         
     }
     public void LoadLevel(string nextLevel) {
-
+        ClockManagerScript.Reset();
         if (SceneExists(nextLevel)) {
             StartCoroutine(LoadNext(nextLevel));
         } else {
             StartCoroutine(LoadNext("Menu"));
         }
+
+    }
+    public void LoadMenu() {
+        StartCoroutine(LoadNext("Menu"));
 
     }
 
@@ -68,21 +78,12 @@ public class LevelManagerScript : MonoBehaviour
         while (true) {
             string levelName = $"Level{i}";
             if (!SceneExists(levelName)) {
-                return i - 1;
+                return i;
             }
             i++;
         }
     }
 
-    // public void LoadMenu() {
-
-    //     GameObject Game = GameObject.FindGameObjectWithTag("GameManager");
-    //     GameManagerScript GM = Game.GetComponent<GameManagerScript>();
-    //     Destroy(GM.gameObject);
-    //     GameManagerScript.Instance = null;
-    //     StartCoroutine(LoadNext("Menu"));
-        
-    // }
 
 
     

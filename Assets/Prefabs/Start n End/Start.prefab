@@ -170,13 +170,17 @@ PrefabInstance:
       propertyPath: Target.TrackingTarget
       value: 
       objectReference: {fileID: 2804545623924572019}
+    - target: {fileID: 5919702039882938076, guid: 364a4c59f8ff96cabb18969d8d288c71, type: 3}
+      propertyPath: Composition.HardLimits.Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6878654992050331591, guid: 364a4c59f8ff96cabb18969d8d288c71, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.971429
+      value: 3.210988
       objectReference: {fileID: 0}
     - target: {fileID: 6878654992050331591, guid: 364a4c59f8ff96cabb18969d8d288c71, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -11.53856
+      value: -12.53856
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

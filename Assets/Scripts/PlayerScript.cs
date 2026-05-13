@@ -21,6 +21,8 @@ public class PlayerScript : MonoBehaviour
     float onWallCounter;
     public float gravityScale = 2.5f;
     public float slideGravity = 1.5f;
+
+    public float deathZoneBelow = 0f;
     
 
     private Rigidbody2D rb;
@@ -54,7 +56,7 @@ public class PlayerScript : MonoBehaviour
 
         Vector2 movingSide = rb.linearVelocityX < 0 ? Vector2.left : Vector2.right;
 
-        touchingWall = Physics2D.Raycast(transform.position, movingSide, transform.localScale.x/2 + .2f, wallJumpables);
+        touchingWall = Physics2D.Raycast(transform.position, movingSide, transform.localScale.x/2 + .15f, wallJumpables);
         
         
         
@@ -71,20 +73,28 @@ public class PlayerScript : MonoBehaviour
     bool disableMomentumLine;
     void Update()
     {
+
+        if(transform.position.y < deathZoneBelow) {
+            LevelManagerScript.Reset();
+        }
         float dt = Time.deltaTime;
         
         if(moveInput.magnitude == 0) { //not moving            
             momentum = Vector2.MoveTowards(momentum, Vector2.zero, deceleration * Time.deltaTime );
 
         }else{
+            float multiplier = 1f;
+            if (!touchingGround) {
+                multiplier = 0.25f;
+            }
 
 
             // If input is opposite to current momentum, decelerate faster
             if (Vector2.Dot(moveInput, momentum) < 0){
-                momentum = Vector2.MoveTowards(momentum, Vector2.zero, deceleration * 2f * dt);
+                momentum = Vector2.MoveTowards(momentum, Vector2.zero, deceleration * 1.5f * dt);
             }
 
-            momentum += moveInput * acceleration * dt;
+            momentum += moveInput * acceleration * dt * multiplier;
             momentum = Vector2.ClampMagnitude(momentum, maxMomentum);
         }
 

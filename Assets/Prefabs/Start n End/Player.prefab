@@ -191,8 +191,9 @@ MonoBehaviour:
   jumpBufferTime: 0.15
   wallJumpBufferTime: 0.15
   onWallTime: 0.15
-  gravityScale: 2.5
+  gravityScale: 2.8
   slideGravity: 1.5
+  deathZoneBelow: 0
   walkables:
     serializedVersion: 2
     m_Bits: 896

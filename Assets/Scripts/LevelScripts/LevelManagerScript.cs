@@ -20,6 +20,10 @@ public class LevelManagerScript : MonoBehaviour
         return false;
     }
 
+    public void Quit() {
+        Application.Quit();
+    }
+
     IEnumerator LoadNext(string nextLevel) {
         yield return SceneManager.LoadSceneAsync(nextLevel);
     }

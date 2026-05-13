@@ -105,7 +105,7 @@ public class PlayerScript : MonoBehaviour
         else {
             Vector2 vel = rb.linearVelocity;
             
-            vel.x += moveInput.x * dt * acceleration; 
+            vel.x += moveInput.x * dt * acceleration / 2; 
             vel = Vector2.ClampMagnitude(vel, maxMomentum);
             
             rb.linearVelocity = vel;

@@ -5,9 +5,6 @@ public class LevelFinishPanelScript : MonoBehaviour
 {
     public TMP_Text minSecsText;
     public TMP_Text msText;
-    void OnEnable() {
-        
-    }
     public void updatePB(float pb) {
         if(pb < 0) {
             minSecsText.text = "TBD";

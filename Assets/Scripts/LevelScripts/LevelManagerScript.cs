@@ -52,7 +52,7 @@ public class LevelManagerScript : MonoBehaviour
         return SceneManager.GetActiveScene().name;
     }
     public int getLevelNumber(string level) {
-        return Convert.ToInt32(level.Replace("Level", "")) + 1;
+        return Convert.ToInt32(level.Replace("Level", ""));
     }
     public int getCurrentLevelNumber() {
         return getLevelNumber( getCurrentLevelName() );

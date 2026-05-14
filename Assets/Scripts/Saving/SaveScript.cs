@@ -28,7 +28,7 @@ public class SaveScript : MonoBehaviour {
         
         for (int i = 0; i < LevelManagerScript.levelCount(); i++) {
             if (i >= data.levels.Count) {
-                data.levels.Add(new LevelSaveData { levelID = i, bestTime = -1 });
+                data.levels.Add(new LevelSaveData { levelID = i, bestTime = -1, badgeName = Badge.empty.name});
             }
         }
 
@@ -94,5 +94,10 @@ public class SaveScript : MonoBehaviour {
         LevelSaveData level = Load(levelNum);
         if (level == null) { return -1f; }
         return level.bestTime;
+    }
+    public string LoadBadgename(int levelNum) {
+        LevelSaveData level = Load(levelNum);
+        if (level == null) { return Badge.empty.name; }
+        return level.badgeName;
     }
 }

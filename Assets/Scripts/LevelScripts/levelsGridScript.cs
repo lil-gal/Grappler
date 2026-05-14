@@ -10,8 +10,11 @@ public class levelsGridScript : MonoBehaviour {
     public GameObject levelButtonPrefab;
     public GameObject leftArrow;
     public GameObject rightArrow;
+
+    SaveScript saveScript;
     
     void Start(){
+        saveScript = GetComponent<SaveScript>();
         Refresh();
     }
 
@@ -28,6 +31,9 @@ public class levelsGridScript : MonoBehaviour {
             int lvlIndex = startAtLevel + i;
             GameObject btnObject = Instantiate(levelButtonPrefab, transform);
             Button btn = btnObject.GetComponent<Button>();
+
+            LevelInfoScript timeAndBadge = btnObject.GetComponentInChildren<LevelInfoScript>();
+            timeAndBadge.Change(saveScript.Load(lvlIndex));
             
             btn.transform.GetChild(0).GetComponent<TMP_Text>().text = $"Level {lvlIndex}";
 
